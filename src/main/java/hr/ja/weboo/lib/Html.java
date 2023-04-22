@@ -1,6 +1,7 @@
-package hr.ja.lib;
+package hr.ja.weboo.lib;
 
 public class Html extends Widget {
+
     private final String html;
 
     public Html(String html) {

@@ -1,4 +1,4 @@
-package hr.ja.lib;
+package hr.ja.weboo.lib;
 
 @FunctionalInterface
 public interface BindToWeb<M> {

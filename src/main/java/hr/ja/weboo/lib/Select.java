@@ -1,63 +1,91 @@
 package hr.ja.weboo.lib;
 
-import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Getter
-public class MultiSelect<M> extends FormField<M> {
+@Setter
+public class Select extends FormField {
+    private List<Option> options = new ArrayList<>(5);
 
-    private final String fieldName;
+    private boolean multiselect = false;
 
-    private final String label;
-
-    private List<SelectKeyValue> keyValues;
-
-    public MultiSelect(String fieldName, String label, List<SelectKeyValue> keyValues) {
-        this.fieldName = fieldName;
+    public Select(String fieldName, String label) {
+        super();
+        this.name = fieldName;
         this.label = label;
-        this.keyValues = keyValues;
+    }
+
+    public Select(String fieldName, String label, List<Option> options) {
+        super();
+        this.name = fieldName;
+        this.label = label;
+        this.options = options;
     }
 
     @Override
     public String toHtml() {
         String h = """
-              <div class="mb-3">
-              <label for="{fieldName}" class="form-label" id="{id}">{label}</label>
-              <select class="form-select" multiple name="{fieldName}" id="{fieldName}">
-                 {#for item in values}
-                       <option value='{item.key}' {item.getSelectedParam()}>{item.value}</option>
+              <div class="mb-3" id="{id}">
+              <label for="{name}" class="form-label" id="{id}">{label}</label>
+              <select class="form-select {errorClass}" {multiselect ? 'multiple' : ''} name="{name}" id="{name}" {autofocus}>
+                 {#for item in options}
+                       <option value='{item.key}' {item.selected ? 'selected' : ''} {item.disable ? 'disabled' : ''}  >{item.label}</option>
                   {/for}
               </select>
+                 {#for err in errMsgs}
+                  <div class="invalid-feedback">
+                      {err}
+                  </div>
+                  {/for}
               </div>
               """;
         return MyUtil.qute(h, Map.of(
-              "fieldName", fieldName,
+              "name", name,
               "label", label,
               "id", getId(),
-              "values", keyValues
+              "options", options,
+              "multiselect", multiselect,
+              "errorClass", getErrorClass(),
+              "errMsgs", errorMessages,
+              "autofocus", isAutofocus() ? "autofocus" : ""
         ));
     }
 
-    @Data
-    public static class SelectKeyValue {
-        String key;
-        String value;
-        boolean selected;
 
-        public SelectKeyValue(String value) {
-            this.key = value;
-            this.value = value;
-        }
+    public Select addOption(Object key, String value, boolean selected) {
+        options.add(new Option(key.toString(), value, selected));
+        return this;
+    }
 
-        public String getSelectedParam() {
-            if (selected) return "selected";
-            return "";
-        }
+
+
+    public Select addOption(Object key, String value) {
+        return addOption(key, value, false);
+    }
+
+    public Select addOption(String keyValue) {
+        return addOption(keyValue, keyValue, false);
+    }
+
+    public Select addOptionSelected(String keyValue) {
+        return addOption(keyValue, keyValue, false);
+    }
+
+    public Select addOptionSelected(String key, String value) {
+        return addOption(key, value, false);
+    }
+
+    public Select addOptionSelectedDisabled(String value) {
+        Option option = new Option(value, value, true);
+        option.setDisable(true);
+        options.add(option);
+        return this;
+
     }
 }
 

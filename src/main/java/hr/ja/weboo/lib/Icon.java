@@ -1,7 +1,6 @@
-package hr.ja.lib;
+package hr.ja.weboo.lib;
 
 import lombok.Getter;
-import org.apache.commons.lang3.StringUtils;
 
 public class Icon {
     public static Icon house = new Icon("""

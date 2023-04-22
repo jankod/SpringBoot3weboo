@@ -1,4 +1,4 @@
-package hr.ja.model;
+package hr.ja.weboo.model;
 
 public enum Role {
     ADMIN,

@@ -1,6 +1,4 @@
-package hr.ja.lib;
-
-import io.quarkus.qute.Qute;
+package hr.ja.weboo.lib;
 
 import java.util.ArrayList;
 import java.util.Collection;

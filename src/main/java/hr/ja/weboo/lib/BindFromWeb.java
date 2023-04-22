@@ -1,8 +1,9 @@
-package hr.ja.lib;
+package hr.ja.weboo.lib;
 
-import spark.Request;
+
+import org.springframework.web.context.request.WebRequest;
 
 @FunctionalInterface
 public interface BindFromWeb<M> {
-    void bind(Request request, M model);
+    void bind(WebRequest request, M model);
 }

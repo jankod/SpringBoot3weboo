@@ -1,4 +1,4 @@
-package hr.ja.lib;
+package hr.ja.weboo.lib;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -11,6 +11,6 @@ public class P extends Widget {
 
     @Override
     public String toHtml() {
-        return "<p>%s</h3>".formatted(MyUtil.escape(text));
+        return "<p>%s</p>".formatted(MyUtil.escape(text));
     }
 }

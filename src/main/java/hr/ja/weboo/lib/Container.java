@@ -1,7 +1,6 @@
-package hr.ja.lib;
+package hr.ja.weboo.lib;
 
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

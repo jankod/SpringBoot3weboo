@@ -1,11 +1,12 @@
-package hr.ja.weboo.pages;
+package hr.ja.weboo.lib;
 
-import lombok.Data;
 
-@Data
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public abstract class Page {
-
     private String title;
-
 
 }

@@ -1,14 +1,31 @@
-package hr.ja.lib;
+package hr.ja.weboo.lib;
 
-import io.quarkus.qute.Escaper;
-import io.quarkus.qute.Qute;
-import spark.utils.CollectionUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import hr.ja.weboo.model.User;
+import io.quarkus.qute.*;
+import lombok.extern.slf4j.Slf4j;
+import nonapi.io.github.classgraph.json.JSONUtils;
+import org.springframework.util.CollectionUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 
-import java.util.Collections;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class MyUtil {
+
+    static {
+        Engine engine = Engine.builder().strictRendering(true)
+              .addDefaults()
+              .addValueResolver(new ReflectionValueResolver())
+              .build();
+        Qute.setEngine(engine);
+        Qute.enableCache();
+    }
+
     private static final Escaper e = Escaper.builder().build();
 
     public static String escape(String text) {
@@ -30,7 +47,28 @@ public class MyUtil {
         return Qute.fmt(html, map);
     }
 
-    public static GetMethodHandler getGetMethods(Class<? extends Page> page) {
-        return null;
+    public static Object choice(boolean condition, String value1, String value2) {
+        if (condition) {
+            return value1;
+        }
+        return value2;
+    }
+
+    public static void printErrors(BindingResult bindingResult) {
+        for (ObjectError err : bindingResult.getAllErrors()) {
+            log.debug("{}", err);
+        }
+    }
+
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    public static String toJson(Object user) {
+        StringWriter w = new StringWriter();
+        try {
+            objectMapper.writeValue(w, user);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return w.toString();
     }
 }

@@ -1,4 +1,4 @@
-package hr.ja.lib;
+package hr.ja.weboo.lib;
 
 public class HtmlUtil {
 
@@ -16,5 +16,28 @@ public class HtmlUtil {
     public static P p(String text) {
         return new P(text);
     }
+
+    public static Div div(String text) {
+        return new Div(text);
+    }
+
+    public static Br br() {
+        return new Br();
+    }
+
+    public static Div div(String classes, Widget w) {
+        var div = div(w);
+        div.addClass(classes);
+        return div;
+    }
+
+    public static Div div(Widget w) {
+        return new Div(w);
+    }
+
+    public static Html html(String html) {
+        return new Html(html);
+    }
+
 
 }

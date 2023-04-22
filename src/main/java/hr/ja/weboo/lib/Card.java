@@ -1,6 +1,5 @@
-package hr.ja.lib;
+package hr.ja.weboo.lib;
 
-import jakarta.validation.constraints.NotNull;
 
 public class Card extends Widget {
 
@@ -12,7 +11,7 @@ public class Card extends Widget {
         this.widgetBody = widgetBody;
     }
 
-    public Card(@NotNull Widget widgetTitle, @NotNull Widget widgetBody) {
+    public Card(Widget widgetTitle, Widget widgetBody) {
         this.widgetTitle = widgetTitle;
         this.widgetBody = widgetBody;
     }
@@ -21,8 +20,10 @@ public class Card extends Widget {
     public String toHtml() {
         return """
               <div class='card'>
-                  <div class='card-title'>
+                  <div class='card-header'>
+                    <div class='card-title'>
                       %s
+                    </div>
                   </div>
                   <div class="card-body">
                       %s

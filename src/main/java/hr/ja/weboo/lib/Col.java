@@ -24,6 +24,6 @@ public class Col extends Widget {
               <div class='%s' id='%s'>
                     %s
               </div>
-              """.formatted(classes, getId(), getChildrenHtml());
+              """.formatted(classes, getId(), toChildrenHtml());
     }
 }

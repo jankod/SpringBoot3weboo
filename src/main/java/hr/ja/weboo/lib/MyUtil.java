@@ -5,6 +5,7 @@ import hr.ja.weboo.model.User;
 import io.quarkus.qute.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
@@ -69,22 +70,17 @@ public class MyUtil {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
+    @SneakyThrows
     public static String toJson(Object user) {
-        StringWriter w = new StringWriter();
-        try {
-            objectMapper.writeValue(w, user);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-        return w.toString();
+        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(user);
     }
 
     public static HttpServletRequest request() {
 
-         // RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        // RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         //requestAttributes.
 
-       // ServletUriComponentsBuilder.fromCurrentRequest().build();
+        // ServletUriComponentsBuilder.fromCurrentRequest().build();
         //WebUtils.findParameterValue()
         RequestAttributes attrs = RequestContextHolder.getRequestAttributes();
         Assert.state(attrs instanceof ServletRequestAttributes, "No current ServletRequestAttributes");

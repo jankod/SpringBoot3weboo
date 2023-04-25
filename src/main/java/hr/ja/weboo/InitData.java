@@ -9,7 +9,7 @@ public class InitData {
 
     @PostConstruct
     public void initUser() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 32; i++) {
             User u = new User(i, "user " + i);
             u.save();
         }

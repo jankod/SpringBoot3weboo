@@ -17,7 +17,7 @@ public class Row extends Widget {
               <div class='row'>
                       %s
               </div>
-              """.formatted(getChildrenHtml());
+              """.formatted(toChildrenHtml());
     }
 
 

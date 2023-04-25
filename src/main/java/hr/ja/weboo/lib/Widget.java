@@ -7,13 +7,12 @@ import org.apache.commons.lang3.RandomStringUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class Widget implements HashId {
 
     @JsonIgnore
     @Getter
-    private final String id = RandomStringUtils.randomAlphanumeric(10);
+    private final String id = RandomStringUtils.randomAlphabetic(10);
 
     @JsonIgnore
     @Getter
@@ -34,7 +33,7 @@ public abstract class Widget implements HashId {
 
     public abstract String toHtml();
 
-    public String getChildrenHtml() {
+    public String toChildrenHtml() {
         return MyUtil.toHtml(getChildren());
     }
 

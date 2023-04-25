@@ -1,5 +1,6 @@
 package hr.ja.weboo;
 
+import hr.ja.weboo.lib.Card;
 import hr.ja.weboo.lib.HtmlUtil;
 import hr.ja.weboo.lib.Table;
 import hr.ja.weboo.model.User;
@@ -34,7 +35,9 @@ public class UserListPage {
         table.column(User.Fields.name, "Name");
         table.setData(User.getAll());
 
-        site.add(table);
+        Card card = new Card("Uset table", table);
+        card.setBodyClasses("");
+        site.add(card);
 
         return site;
     }

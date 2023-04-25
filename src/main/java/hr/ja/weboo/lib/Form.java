@@ -1,19 +1,8 @@
 package hr.ja.weboo.lib;
 
 import hr.ja.weboo.lib.js.JsCommand;
-import hr.ja.weboo.model.User;
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.Getter;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 
 @Slf4j
@@ -49,7 +38,7 @@ public class Form extends Widget {
                   <input type='hidden' name='_form_id' value='%s'>
                       %s
               </form>
-              """.formatted(getId(), actionUrl, getId(), getChildrenHtml());
+              """.formatted(getId(), actionUrl, getId(), toChildrenHtml());
     }
 
     public static String getFormId() {

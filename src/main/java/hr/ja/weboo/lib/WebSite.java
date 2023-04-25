@@ -43,7 +43,9 @@ public class WebSite {
                   <meta name="viewport" content="width=device-width, initial-scale=1">
                   <title>{title}</title>
                   <link href="/bootstrap-5.3.0-alpha3/bootstrap.min.css" rel="stylesheet">
-                  <link href="/tabulator/css/tabulator.min.css" rel="stylesheet">
+              
+                   <link href="/tabulator/css/tabulator_bootstrap5.min.css" rel="stylesheet">
+                   
                   <script type="text/javascript" src="/bootstrap-5.3.0-alpha3/bootstrap.bundle.min.js"></script>
                   <script type="text/javascript" src="/tabulator/js/tabulator.min.js"></script>
                   <script type="text/javascript" src="/jquery-3.6.4.min.js"></script>

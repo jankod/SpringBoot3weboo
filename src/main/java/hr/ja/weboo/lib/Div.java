@@ -12,7 +12,7 @@ public class Div extends Widget {
 
     @Override
     public String toHtml() {
-        return "<div %s>%s</div>".formatted(classesAsAtribute(), getChildrenHtml());
+        return "<div %s>%s</div>".formatted(classesAsAtribute(), toChildrenHtml());
 
     }
 

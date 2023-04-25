@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import java.util.ArrayList;
@@ -23,11 +24,11 @@ public class WebSite {
 
     private String siteName = "Site name";
 
-    private List<Widget> widgets = new ArrayList<>();
-    private List<NavItem> items = new ArrayList<>();
+    private List<Widget> bodyWidgets = new ArrayList<>();
+    private List<NavItem> navItems = new ArrayList<>();
 
     public void add(Widget widget) {
-        widgets.add(widget);
+        bodyWidgets.add(widget);
     }
 
 
@@ -47,6 +48,8 @@ public class WebSite {
                   <script type="text/javascript" src="/tabulator/js/tabulator.min.js"></script>
                   <script type="text/javascript" src="/jquery-3.6.4.min.js"></script>
                   <script type="text/javascript" src="/all.js"></script>
+                  
+                  <script type="text/javascript" src="/_custom.js"></script>
  <!--                 <script defer src="/alpine.min.js"></script> -->
                   
                    {style}
@@ -80,15 +83,15 @@ public class WebSite {
 
     private String createFlashAlert(HttpServletRequest request) {
         Map<String, ?> f = RequestContextUtils.getInputFlashMap(request);
-//        log.debug("Find flash {}", f);
-        if (f != null && !f.isEmpty()) {
-            return "FLASH " + f.toString();
+      //  log.debug("Find flash {}", f);
+        if(!CollectionUtils.isEmpty(f)) {
+            return "FLASH " + f;
         }
         return "";
     }
 
     private String body() {
-        return MyUtil.toHtml(widgets);
+        return MyUtil.toHtml(bodyWidgets);
     }
 
     private String style() {
@@ -127,7 +130,7 @@ public class WebSite {
 
     private String navbar() {
 
-        String navHtml = items.stream().map(i -> {
+        String navHtml = navItems.stream().map(i -> {
             String active = "";
             if (i.isActive()) {
                 active = "active";
@@ -176,14 +179,14 @@ public class WebSite {
     }
 
     public void setActiveUrl(String url) {
-        Optional<NavItem> navitem = items.stream().filter(i -> i.getUrl().equals(url)).findFirst();
+        Optional<NavItem> navitem = navItems.stream().filter(i -> i.getUrl().equals(url)).findFirst();
         navitem.ifPresent(navItem -> navItem.setActive(true));
     }
 
 
     public void addNavigation(String url, String label) {
         NavItem item = new NavItem(url, label);
-        items.add(item);
+        navItems.add(item);
     }
 }
 

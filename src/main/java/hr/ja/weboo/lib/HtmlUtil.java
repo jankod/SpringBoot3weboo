@@ -35,6 +35,10 @@ public class HtmlUtil {
         return new Div(w);
     }
 
+    public static Link link(String url, String label) {
+        return new Link(url,label);
+    }
+
     public static Html html(String html) {
         return new Html(html);
     }

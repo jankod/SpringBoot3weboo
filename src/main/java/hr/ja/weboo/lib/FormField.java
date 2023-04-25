@@ -21,6 +21,8 @@ public abstract class FormField extends Widget {
     protected String label;
     protected String value;
 
+    protected String placeholder;
+
     private boolean autofocus = false;
 
     protected List<String> errorMessages = new ArrayList<>();

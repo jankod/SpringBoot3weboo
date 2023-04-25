@@ -3,11 +3,19 @@ package hr.ja.weboo.lib;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.ja.weboo.model.User;
 import io.quarkus.qute.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import nonapi.io.github.classgraph.json.JSONUtils;
+import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.WebUtils;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -70,5 +78,25 @@ public class MyUtil {
             throw new RuntimeException(ex);
         }
         return w.toString();
+    }
+
+    public static HttpServletRequest request() {
+
+         // RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        //requestAttributes.
+
+       // ServletUriComponentsBuilder.fromCurrentRequest().build();
+        //WebUtils.findParameterValue()
+        RequestAttributes attrs = RequestContextHolder.getRequestAttributes();
+        Assert.state(attrs instanceof ServletRequestAttributes, "No current ServletRequestAttributes");
+        return ((ServletRequestAttributes) attrs).getRequest();
+    }
+
+    public static HttpServletResponse response() {
+
+        RequestAttributes attrs = RequestContextHolder.getRequestAttributes();
+        Assert.state(attrs instanceof ServletRequestAttributes, "No current ServletRequestAttributes");
+        ServletRequestAttributes att = (ServletRequestAttributes) attrs;
+        return att.getResponse();
     }
 }

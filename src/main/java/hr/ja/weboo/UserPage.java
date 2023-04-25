@@ -1,9 +1,6 @@
 package hr.ja.weboo;
 
-import hr.ja.weboo.lib.Form;
-import hr.ja.weboo.lib.Link;
-import hr.ja.weboo.lib.Select;
-import hr.ja.weboo.lib.SubmitButton;
+import hr.ja.weboo.lib.*;
 import hr.ja.weboo.model.Role;
 import hr.ja.weboo.model.User;
 import hr.ja.weboo.service.UserService;
@@ -13,15 +10,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.View;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
-
-import java.util.List;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import static hr.ja.weboo.lib.HtmlUtil.*;
 
@@ -39,6 +33,7 @@ public class UserPage {
 
     @GetMapping(HOME_URL)
     public MyWebSite home(HttpServletRequest request) {
+        String path = ServletUriComponentsBuilder.fromCurrentRequest().build().getPath();
         MyWebSite site = new MyWebSite(HOME_URL, "Home");
 
         site.add(h3("Home page"));
@@ -50,48 +45,45 @@ public class UserPage {
 
 
     @PostMapping(ADD_URL)
-    public View handleForm(@Valid User user, BindingResult errors, RedirectAttributes flash, HttpServletRequest request) {
+    @ResponseBody
+    public AjaxFormResult handleForm(@Valid User user, BindingResult errors, RedirectAttributes flash) {
+
+        //RequestContextHolder.getRequestAttributes().
+        //ResponseEntity s
+
         log.debug("Form user {}", user);
         if (errors.hasErrors()) {
-            Form.setError(errors, request);
-            return showUserForm(request);
+            return AjaxFormResult.error(errors);
         }
 
-        flash.addFlashAttribute("Form je uspjesno unesena!");
-        return new RedirectView(HOME_URL);
+        Div html = div(new Card("Uspjesno je forma izvrsena", link(HOME_URL, "Idi naHome page")));
+
+        return Form.replaceRequestForm(html.toHtml());
     }
 
     @GetMapping(ADD_URL)
-    public MyWebSite showUserForm(HttpServletRequest request) {
+    public MyWebSite showUserForm() {
 
         MyWebSite site = new MyWebSite(ADD_URL, "Add user");
 
         site.add(div("Add user form"));
 
-        Form form = new Form(request);
+
+        Form form = new Form();
 
         form.add(h3("Form for enter new user"));
         form.text(User.Fields.name, "Name").autofocus();
 
-        Select select = form.select(User.Fields.roles, "Choose role")
+        form.select(User.Fields.roles, "Choose role")
               .addOptionSelectedDisabled("Please, select value")
               .addOption(Role.USER, "User")
               .addOption(Role.ADMIN, "Admin");
 
-        log.debug("options {}", select.getOptions());
 
         form.add(new SubmitButton("Save"));
         site.add(form);
 
         return site;
     }
-
-
-//    @GetMapping(LIST_URL)
-//    public UserListView list() {
-//        Collection<User> users = userService.findAllUsers();
-//        return new UserListView(users, LIST_URL);
-//    }
-
 
 }

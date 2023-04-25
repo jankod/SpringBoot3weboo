@@ -36,7 +36,7 @@ public class MyWebSite extends JavaView {
 
         PrintWriter writer = response.getWriter();
         List<Widget> bodyWidgets = getChildren();
-        site.setWidgets(bodyWidgets);
+        site.setBodyWidgets(bodyWidgets);
         writer.write(site.render(request, response));
     }
 

@@ -39,7 +39,7 @@ Weboo.form = function (formEl, funcValidated) {
                     $.each(res.jsCommands, function (num, command) {
                         // console.log("command ", command);
                         if (typeof Weboo.commands[command.name] === "function") {
-                            Weboo.commands[command.name](command.params);
+                            Weboo.commands[command.name](...command.params);
                             //console.log("Nasao sam function command")
                         } else {
                             console.warn(`Not find command ${command.name}`)

@@ -56,7 +56,9 @@ public class UserPage {
             return AjaxFormResult.error(errors);
         }
 
-        Div html = div(new Card("Uspjesno je forma izvrsena", link(HOME_URL, "Idi naHome page")));
+        user.save();
+
+        Div html = div(new Card("Uspjesno je forma izvrsena", link(HOME_URL, "Idi na Home page")));
 
         return Form.replaceRequestForm(html.toHtml());
     }
@@ -66,12 +68,12 @@ public class UserPage {
 
         MyWebSite site = new MyWebSite(ADD_URL, "Add user");
 
-        site.add(div("Add user form"));
+        site.add(h3("Forma za unos usera"));
 
 
         Form form = new Form();
 
-        form.add(h3("Form for enter new user"));
+        form.add(p("Form for enter new user"));
         form.text(User.Fields.name, "Name").autofocus();
 
         form.select(User.Fields.roles, "Choose role")

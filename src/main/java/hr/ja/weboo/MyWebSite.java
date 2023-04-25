@@ -19,6 +19,7 @@ public class MyWebSite extends JavaView {
         site.setSiteName("Java view");
         site.addNavigation(UserPage.HOME_URL, "Home user");
         site.addNavigation(UserPage.ADD_URL, "Add user");
+        site.addNavigation(UserListPage.USER_LIST_URL, "User list");
     }
 
     public MyWebSite(String activeUrl, String title) {

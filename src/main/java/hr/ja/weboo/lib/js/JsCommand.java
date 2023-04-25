@@ -57,7 +57,7 @@ public class JsCommand implements Serializable {
         String js = """
               Weboo.commands.ReplaceHtmlJsCommand = function (elementSelector, html) {
                   $(elementSelector).html(html);
-                  console.log("replace html", elementSelector);
+                  console.log("replace html: ", elementSelector );
               }
               """;
 

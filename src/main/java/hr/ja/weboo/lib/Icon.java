@@ -14,7 +14,6 @@ public class Icon {
           </svg>
           """);
 
-    @Getter
     private final String svg;
 
     public Icon(String svg) {

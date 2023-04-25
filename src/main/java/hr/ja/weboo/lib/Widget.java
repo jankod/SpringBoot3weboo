@@ -1,5 +1,6 @@
 package hr.ja.weboo.lib;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -10,12 +11,15 @@ import java.util.stream.Collectors;
 
 public abstract class Widget implements HashId {
 
+    @JsonIgnore
     @Getter
     private final String id = RandomStringUtils.randomAlphanumeric(10);
 
+    @JsonIgnore
     @Getter
     private List<String> clasess = new ArrayList<>(4);
 
+    @JsonIgnore
     @Getter
     private List<Widget> children = new ArrayList<>(6);
 

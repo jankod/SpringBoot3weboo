@@ -2,7 +2,7 @@ package hr.ja.weboo.lib;
 
 public class Layout {
 
-    public static Row row(Col... cols) {
+    public static Row row(Widget... cols) {
         return new Row(cols);
     }
 

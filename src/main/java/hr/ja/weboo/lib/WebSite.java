@@ -36,43 +36,41 @@ public class WebSite {
         String flashHtml = createFlashAlert(request);
 
         String h = """
-              <!doctype html>
-              <html lang="en" data-bs-theme="light">
-              <head>
-                  <meta charset="utf-8">
-                  <meta name="viewport" content="width=device-width, initial-scale=1">
-                  <title>{title}</title>
-                  <link href="/bootstrap-5.3.0-alpha3/bootstrap.min.css" rel="stylesheet">
-              
-                   <link href="/tabulator/css/tabulator_bootstrap5.min.css" rel="stylesheet">
-                   
-                  <script type="text/javascript" src="/bootstrap-5.3.0-alpha3/bootstrap.bundle.min.js"></script>
-                  <script type="text/javascript" src="/tabulator/js/tabulator.min.js"></script>
-                  <script type="text/javascript" src="/jquery-3.6.4.min.js"></script>
-                  <script type="text/javascript" src="/all.js"></script>
-                  
-                  <script type="text/javascript" src="/_custom.js"></script>
- <!--                 <script defer src="/alpine.min.js"></script> -->
-                  
-                   {style}
-              </head>
-              <body>
-              <main class='d-flex flex-nowrap'>
-                  {navbar}
-                  <div class="b-divider"></div>
-                  <div class='col py-3'>
-                      <div class='container'>
-                           {flashMessage}
-                      
-                          {body}
-                      </div>
-                  </div>
-                            
-                  </div>
-                            
-              </body>
-              </html>
-                            """;
+                           <!doctype html>
+                           <html lang="en" data-bs-theme="light">
+                           <head>
+                               <meta charset="utf-8">
+                               <meta name="viewport" content="width=device-width, initial-scale=1">
+                               <title>{title}</title>
+                               <link href="/bootstrap-5.3.0-alpha3/bootstrap.min.css" rel="stylesheet">
+                               <link href="/tabulator/css/tabulator_bootstrap5.min.css" rel="stylesheet">
+                               <script type="text/javascript" src="/bootstrap-5.3.0-alpha3/bootstrap.bundle.min.js"></script>
+                               <script type="text/javascript" src="/tabulator/js/tabulator.min.js"></script>
+                               <script type="text/javascript" src="/jquery-3.6.4.min.js"></script>
+                               <script type="text/javascript" src="/all.js"></script>
+                               
+                               <script type="text/javascript" src="/_custom.js"></script>
+              <!--                 <script defer src="/alpine.min.js"></script> -->
+                               
+                                {style}
+                           </head>
+                           <body>
+                           <main class='d-flex flex-nowrap'>
+                               {navbar}
+                               <div class="b-divider"></div>
+                               <div class='col py-3'>
+                                   <div class='container'>
+                                        {flashMessage}
+                                   
+                                       {body}
+                                   </div>
+                               </div>
+                                         
+                               </div>
+                                         
+                           </body>
+                           </html>
+                                         """;
         return MyUtil.qute(h, Map.of(
               "title", getTitle(),
               "style", style(),
@@ -85,8 +83,8 @@ public class WebSite {
 
     private String createFlashAlert(HttpServletRequest request) {
         Map<String, ?> f = RequestContextUtils.getInputFlashMap(request);
-      //  log.debug("Find flash {}", f);
-        if(!CollectionUtils.isEmpty(f)) {
+        //  log.debug("Find flash {}", f);
+        if (!CollectionUtils.isEmpty(f)) {
             return "FLASH " + f;
         }
         return "";

@@ -13,7 +13,7 @@ public class Card extends Widget {
     private final Widget widgetTitle;
     private final Widget widgetBody;
     private String bodyClasses = "card-body ";
-    private String titleClasses  ="card-title";
+    private String titleClasses = "card-title";
 
     public Card(String titleText, Widget widgetBody) {
         this.widgetTitle = new Span(titleText);
@@ -28,7 +28,7 @@ public class Card extends Widget {
     @Override
     public String toHtml() {
         return MyUtil.qute("""
-              <div class='card'>
+              <div class='card' {classes}>
                   <div class='card-header'>
                     <div class='{titleClasses}'>
                       {title}
@@ -39,6 +39,7 @@ public class Card extends Widget {
                   </div>
               </div>
               """, Map.of(
+              "classes", classesAsAtribute(),
               "title", widgetTitle.toHtml(),
               "titleClasses", titleClasses,
               "body", widgetBody.toHtml(),

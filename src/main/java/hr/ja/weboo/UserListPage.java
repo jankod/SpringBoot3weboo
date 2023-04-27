@@ -1,8 +1,6 @@
 package hr.ja.weboo;
 
-import hr.ja.weboo.lib.Card;
-import hr.ja.weboo.lib.HtmlUtil;
-import hr.ja.weboo.lib.Table;
+import hr.ja.weboo.lib.*;
 import hr.ja.weboo.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.function.Function;
 
 import static hr.ja.weboo.lib.HtmlUtil.p;
+import static hr.ja.weboo.lib.Layout.*;
 
 
 @Slf4j
@@ -31,14 +30,32 @@ public class UserListPage {
 
 
         Table<User> table = new Table<>();
+        table.setLayout(Table.Layout.FIT_DATA_FILL);
         table.column(User.Fields.id, "Id");
         table.column(User.Fields.name, "Name");
         table.setData(User.getAll());
 
         Card card = new Card("Uset table", table);
         card.setBodyClasses("");
-        site.add(card);
+        MyLayout layout = new MyLayout();
+        layout.add(card);
+        site.add(layout);
 
         return site;
+    }
+}
+class MyLayout extends Widget{
+
+    @Override
+    public String toHtml() {
+        return """
+              <div class="container text-center">
+                <div class="row ">
+                  <div class="col-6">
+                    %s
+                  </div>
+                </div>
+              </div>
+              """.formatted(toChildrenHtml());
     }
 }

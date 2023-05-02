@@ -34,10 +34,18 @@ public class UserListPage {
         table.column(User.Fields.id, "Id");
         table.column(User.Fields.name, "Name");
         table.setData(User.getAll());
+        table.onSelectRow("""
+              rowClick:function(e, row){
+                      //e - the click event object
+                      //row - row component
+                      row.toggleSelect(); //toggle row selected state on row click
+                  },
+              """);
 
         Card card = new Card("Uset table", table);
         card.setBodyClasses("");
         MyLayout layout = new MyLayout();
+
         layout.add(card);
         site.add(layout);
 

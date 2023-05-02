@@ -47,6 +47,10 @@ public class Table<M> extends Widget {
         ));
     }
 
+    public void onSelectRow(String jsCode) {
+
+    }
+
     public enum Layout {
         FIT_COLUMNS("fitColumns"),
         FIT_DATA("fitData"),

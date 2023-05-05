@@ -8,10 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.function.Function;
-
 import static hr.ja.weboo.lib.HtmlUtil.p;
-import static hr.ja.weboo.lib.Layout.*;
 
 
 @Slf4j
@@ -30,9 +27,9 @@ public class UserListPage {
 
 
         Table<User> table = new Table<>();
-        table.setLayout(Table.Layout.FIT_DATA_FILL);
+        table.setLayout(Table.Layout.FIT_COLUMNS);
         table.column(User.Fields.id, "Id");
-        table.column(User.Fields.name, "Name");
+        table.column(User.Fields.name, "Name").setHozAlign(Column.HorizontalAlign.right);
         table.setData(User.getAll());
         table.onSelectRow("""
               rowClick:function(e, row){
@@ -44,19 +41,8 @@ public class UserListPage {
 
         Card card = new Card("Uset table", table);
         card.setBodyClasses("");
-        MyLayout layout = new MyLayout();
 
-        layout.add(card);
-        site.add(layout);
-
-        return site;
-    }
-}
-class MyLayout extends Widget{
-
-    @Override
-    public String toHtml() {
-        return """
+        site.add(new Html("""
               <div class="container text-center">
                 <div class="row ">
                   <div class="col-6">
@@ -64,6 +50,8 @@ class MyLayout extends Widget{
                   </div>
                 </div>
               </div>
-              """.formatted(toChildrenHtml());
+              """.formatted(card.toHtml())));
+
+        return site;
     }
 }

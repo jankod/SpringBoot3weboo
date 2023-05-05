@@ -1,8 +1,12 @@
 package hr.ja.weboo.lib;
 
 import hr.ja.weboo.lib.js.JsCommand;
+import hr.ja.weboo.service.SessionManager;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.SerializationUtils;
 import org.springframework.validation.BindingResult;
+
+import java.util.function.Consumer;
 
 
 @Slf4j
@@ -20,11 +24,6 @@ public class Form extends Widget {
         this("");
     }
 
-    public static AjaxFormResult replaceRequestForm(String html) {
-        return AjaxFormResult.commands(new JsCommand.ReplaceHtmlJsCommand("#" + getFormId(), html));
-    }
-
-
     public Form add(FormField filed) {
         super.add(filed);
         return this;
@@ -41,9 +40,7 @@ public class Form extends Widget {
               """.formatted(getId(), actionUrl, getId(), toChildrenHtml());
     }
 
-    public static String getFormId() {
-        return MyUtil.request().getParameter("_form_id");
-    }
+
 
     public TextField text(String name, String label) {
         TextField textField = new TextField(name, label);
@@ -61,6 +58,14 @@ public class Form extends Widget {
         Select select = select(fieldName, label);
         select.setMultiselect(true);
         return select;
+    }
+
+
+    public void onSubmit(FormSubmitConsumer consumer) {
+
+        SessionManager.onSubmit(consumer, this.getId());
+        log.debug("consumer {}", consumer.hashCode());
+        //consumer.accept(new FormSubmitEvent());
     }
 }
 

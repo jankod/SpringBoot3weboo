@@ -83,7 +83,6 @@ public class WebSite {
 
     private String createFlashAlert(HttpServletRequest request) {
         Map<String, ?> f = RequestContextUtils.getInputFlashMap(request);
-        //  log.debug("Find flash {}", f);
         if (!CollectionUtils.isEmpty(f)) {
             return "FLASH " + f;
         }

@@ -12,7 +12,7 @@ public abstract class Widget implements HashId {
 
     @JsonIgnore
     @Getter
-    private final String id = RandomStringUtils.randomAlphabetic(10);
+    private final String id = getClass().getSimpleName() + "_" + RandomStringUtils.randomNumeric(10);
 
     @JsonIgnore
     @Getter
@@ -51,5 +51,10 @@ public abstract class Widget implements HashId {
               class="%s"
               """.formatted(
               String.join(" ", clasess));
+    }
+
+    @Override
+    public String toString() {
+        return toHtml();
     }
 }

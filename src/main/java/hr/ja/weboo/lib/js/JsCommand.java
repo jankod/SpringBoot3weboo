@@ -61,7 +61,6 @@ public class JsCommand implements Serializable {
               }
               """;
 
-
         public ReplaceHtmlJsCommand(String elementSelector, String html) {
             params(elementSelector, html);
         }

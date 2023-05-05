@@ -3,6 +3,7 @@ package hr.ja.weboo.lib;
 import hr.ja.weboo.lib.js.JsCommand;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration;
 import org.springframework.validation.BindingResult;
 
 import java.io.Serializable;
@@ -19,6 +20,14 @@ public class AjaxFormResult {
         a.ok = true;
         a.jsCommands.add(new JsCommand.RedirectJsCommand(homeUrl));
         return a;
+    }
+
+    public static AjaxFormResult replaceRequestForm(Widget w) {
+        return AjaxFormResult.commands(new JsCommand.ReplaceHtmlJsCommand("#" + getFormId(), w.toHtml()));
+    }
+
+    public static String getFormId() {
+        return MyUtil.request().getParameter("_form_id");
     }
 
     public static AjaxFormResult error(BindingResult bindingResult) {
@@ -49,10 +58,6 @@ public class AjaxFormResult {
         private String field;
         private String message;
     }
-
-
-
-
 
 
 }

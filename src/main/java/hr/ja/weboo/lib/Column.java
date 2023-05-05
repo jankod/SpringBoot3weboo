@@ -1,15 +1,29 @@
 package hr.ja.weboo.lib;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-@Data
+
+@Setter
+@Getter
+@Accessors(chain = true)
 public class Column {
     private String title;
     private String field;
-//    public int width;
-//    public String hozAlign;
-//    public String formatter;
-//    public String sorter;
+    private int width;
+    private String formatter;
+    private String sorter;
+    private boolean visible = true;
+    private HorizontalAlign hozAlign;
+
+
+    public enum HorizontalAlign {
+        left,
+        center,
+        right;
+    }
+
 
 //    private final Function<M, Object> columnValue;
 //

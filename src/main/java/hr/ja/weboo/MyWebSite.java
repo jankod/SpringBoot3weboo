@@ -8,9 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.WebUtils;
 
 import java.io.PrintWriter;
 import java.util.List;
@@ -34,7 +31,7 @@ public class MyWebSite extends JavaView {
     }
 
     public MyWebSite(String activeUrl, String title) {
-        log.debug("actice url {}", activeUrl);
+//        log.debug("actice url {}", activeUrl);
 
         activeUrl(activeUrl);
         title(title);

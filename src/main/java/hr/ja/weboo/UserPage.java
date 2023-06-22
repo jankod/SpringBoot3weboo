@@ -42,9 +42,8 @@ public class UserPage {
     @GetMapping(HOME_URL)
     public MyWebSite showHomePage() {
         String path = ServletUriComponentsBuilder.fromCurrentRequest().build().getPath();
-        log.debug("path {}", path);
-        MyWebSite site = new MyWebSite(HOME_URL, "Home");
 
+        MyWebSite site = new MyWebSite(HOME_URL, "Home");
 
         site.add(h3("Home page"));
 

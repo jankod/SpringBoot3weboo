@@ -43,7 +43,7 @@ public class QuteTest {
 class DemoWidget extends Widget {
 
     private Div div = new Div("Ja sam div");
-    private String demoString = "ja sam demo string $ { } < >";
+    private String demoString = "ja sam demo string ${toHtml()}";
 
     @Override
     public String toHtml() {

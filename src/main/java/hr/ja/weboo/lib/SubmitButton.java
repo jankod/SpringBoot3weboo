@@ -13,7 +13,6 @@ public class SubmitButton extends Widget {
 
     @Override
     public String toHtml() {
-
         return """
               <button type='submit' class='btn btn-primary'>%s</button>
               """.formatted(label);

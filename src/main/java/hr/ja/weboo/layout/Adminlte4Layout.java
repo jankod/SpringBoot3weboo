@@ -31,8 +31,7 @@ public class Adminlte4Layout extends Widget {
                 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
                   <div class="app-wrapper">
                     ${topBar}
-                    <Sidenav path={path} mainPage={mainPage} page={page} />
-                    
+                                       
                     ${sidenav}
                             
                     <!-- Main content -->

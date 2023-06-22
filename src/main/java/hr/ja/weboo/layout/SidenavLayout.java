@@ -318,7 +318,7 @@ public class SidenavLayout extends Widget {
                   </nav>
                 </div>
                 <!-- /.sidebar -->
-              </aside>                                                        
+              </aside>
               """;
         return null;
     }

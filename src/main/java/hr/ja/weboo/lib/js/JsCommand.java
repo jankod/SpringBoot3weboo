@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import hr.ja.weboo.lib.MyUtil;
 import hr.ja.weboo.lib.Widget;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Data
+@JsonTypeInfo(include = As.WRAPPER_OBJECT, use = Id.DEDUCTION)
 public class JsCommand implements Serializable {
     private String name;
     private List<String> params = new ArrayList<>(4);
@@ -22,6 +25,7 @@ public class JsCommand implements Serializable {
 
     public JsCommand() {
         name = getClass().getSimpleName();
+        log.debug("name {}", name);
     }
 
     public static String getAllJsCode() {
@@ -46,11 +50,10 @@ public class JsCommand implements Serializable {
 
         public RedirectJsCommand(String url) {
             param(url);
-//            setName(RedirectJsCommand.class.getSimpleName());
         }
     }
 
-    @JsonTypeInfo(include = As.WRAPPER_OBJECT, use = Id.DEDUCTION)
+    //@JsonTypeInfo(include = As.WRAPPER_OBJECT, use = Id.DEDUCTION)
     public static class ReplaceHtmlJsCommand extends JsCommand {
 
         static

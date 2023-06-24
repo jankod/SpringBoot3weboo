@@ -27,7 +27,7 @@ public class UserListPage {
 
 
         Table<User> table = new Table<>();
-        table.setLayout(Table.Layout.FIT_DATA_FILL);
+        table.setLayout(Table.Layout.FIT_COLUMNS);
 
         table.column(User.Fields.id, "Id");
         table.column(User.Fields.name, "Name").setHozAlign(Column.HorizontalAlign.right);

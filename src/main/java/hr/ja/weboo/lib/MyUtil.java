@@ -13,9 +13,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.support.WebRequestDataBinder;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.context.request.*;
 import org.springframework.web.context.request.async.StandardServletAsyncWebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
@@ -109,7 +107,7 @@ public class MyUtil {
         //ServletUriComponentsBuilder.fromCurrentContextPath()
         //ControllerLinkBuilder we;
         String path = MvcUriComponentsBuilder.fromMethodCall(MvcUriComponentsBuilder.on(UserPage.class).showUserForm()).build().getPath();
-        log.debug("path {}", path);
+       // log.debug("path {}", path);
 
         // RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         //requestAttributes.
@@ -132,7 +130,9 @@ public class MyUtil {
 
     public static BindingResult bindSubmitTo(Object target) {
         WebRequestDataBinder binder = new WebRequestDataBinder(target);
-        StandardServletAsyncWebRequest request = new StandardServletAsyncWebRequest(request(), response());
+
+        //StandardServletAsyncWebRequest request = new StandardServletAsyncWebRequest(request(), response());
+        ServletWebRequest request = new ServletWebRequest(request(), response());
         binder.bind(request);
         return binder.getBindingResult();
     }

@@ -35,8 +35,9 @@ public class UserPage {
 
     @GetMapping("/pero_event")
     public void onSubmit(SubmittedForm event) {
-
         BindingResult errors = MyUtil.bindSubmitTo(new User());
+        log.debug("Suibmit " + event);
+
     }
 
     @GetMapping(HOME_URL)
@@ -87,6 +88,7 @@ public class UserPage {
         form.add(new SubmitButton("Save"));
         site.add(form);
         form.onSubmit(this::onSubmit);
+
         return site;
     }
 

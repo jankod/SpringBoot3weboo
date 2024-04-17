@@ -14,17 +14,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Slf4j
-@Configuration
+//@Configuration
 public class JteConfiguration {
 
-    @Bean
+//    @Bean
     public ViewResolver jteViewResolve(TemplateEngine templateEngine) {
         JteViewResolver jteViewResolver = new JteViewResolver(templateEngine);
         jteViewResolver.setOrder(2);
         return jteViewResolver;
     }
 
-    @Bean
+//    @Bean
     public TemplateEngine templateEngineJta() {
 
         String profile = System.getenv("SPRING_ENV");

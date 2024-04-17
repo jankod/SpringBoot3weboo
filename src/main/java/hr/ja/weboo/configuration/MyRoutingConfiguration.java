@@ -15,14 +15,14 @@ public class MyRoutingConfiguration {
 
     private static final RequestPredicate ACCEPT_JSON = accept(MediaType.APPLICATION_JSON);
 
-    @Bean
-    public RouterFunction<ServerResponse> routerFunction(MyUserHandler userHandler) {
-        return route()
-                .GET("/{user}", ACCEPT_JSON, userHandler::getUser)
-                .GET("/{user}/customers", ACCEPT_JSON, userHandler::getUserCustomers)
-                .DELETE("/{user}", ACCEPT_JSON, userHandler::deleteUser)
-                .build();
-    }
+//    @Bean
+//    public RouterFunction<ServerResponse> routerFunction(MyUserHandler userHandler) {
+//        return route()
+//                .GET("/{user}", ACCEPT_JSON, userHandler::getUser)
+//                .GET("/{user}/customers", ACCEPT_JSON, userHandler::getUserCustomers)
+//                .DELETE("/{user}", ACCEPT_JSON, userHandler::deleteUser)
+//                .build();
+//    }
 
 }
 

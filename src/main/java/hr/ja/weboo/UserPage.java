@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.servlet.tags.form.ButtonTag;
 
 import static hr.ja.weboo.lib.HtmlUtil.*;
 
@@ -49,7 +50,6 @@ public class UserPage {
         site.add(h3("Home page"));
 
         site.add(new Link(ADD_URL, "Add user form"));
-
         return site;
     }
 

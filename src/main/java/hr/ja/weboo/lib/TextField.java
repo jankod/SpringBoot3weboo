@@ -34,7 +34,7 @@ public class TextField extends FormField {
                       {err}
                   </div>
                   {/for}
-                </div>                
+                </div>
               """;
         return MyUtil.qute(html, Map.of(
               "id", getId(),
